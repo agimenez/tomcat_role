@@ -79,6 +79,8 @@ tomcat_pre_installed_folders_deployed:
   host-manager:
     deployed: true
 
+tomcat_check_banner: "Apache Tomcat/{{ tomcat_version }}"
+
 ## Agent configuration (optional)
 
 # tomcat_agents_required_libs:
