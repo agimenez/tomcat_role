@@ -43,14 +43,16 @@ tomcat_catalina_opts:
   - -Xmx512m
 
 ## Tomcat roles
-tomcat_roles:
-  - manager-gui
+tomcat_roles: []
+#tomcat_roles:
+#  - manager-gui
 
 ## Tomcat users
-tomcat_users:
-  - name: admin
-    password: must-be-changed
-    roles: manager-gui
+tomcat_users: []
+#tomcat_users:
+#  - name: admin
+#    password: must-be-changed
+#    roles: manager-gui
 
 ## Deploy
 tomcat_download_from_maven_wars: false
@@ -61,7 +63,7 @@ tomcat_war_to_deploy_from_maven:
     extension: "war"
     repository_url: "http://amavenrepository/any"
 
-tomcat_download_wars: true
+tomcat_download_wars: false
 tomcat_war_to_deploy_urls:
   - url: https://tomcat.apache.org/tomcat-8.5-doc/appdev/sample/sample.war
     name: sample.war
@@ -71,13 +73,13 @@ tomcat_war_to_deploy_path:
 
 tomcat_pre_installed_folders_deployed:
   docs:
-    deployed: true
+    deployed: false
   examples:
-    deployed: true
+    deployed: false
   manager:
-    deployed: true
+    deployed: false
   host-manager:
-    deployed: true
+    deployed: false
 
 tomcat_check_banner: "Apache Tomcat/{{ tomcat_version }}"
 
