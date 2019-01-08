@@ -1,7 +1,7 @@
 ---
 ## General
 
-tomcat_version: 8.5.24
+tomcat_version: 8.5.31
 
 ## Service options
 
@@ -42,6 +42,10 @@ tomcat_catalina_opts:
   - -Xms512m
   - -Xmx512m
 
+tomcat_environment_vars:
+  - name: UMASK
+    value: "\"0022\""
+
 ## Tomcat roles
 tomcat_roles: []
 #tomcat_roles:
@@ -62,6 +66,8 @@ tomcat_war_to_deploy_from_maven:
     artifact_id: "any"
     extension: "war"
     repository_url: "http://amavenrepository/any"
+    # If using Ansible 2.6 or newer, this is settable as well
+    # verify_checksum: always
 
 tomcat_download_wars: false
 tomcat_war_to_deploy_urls:
@@ -80,8 +86,21 @@ tomcat_pre_installed_folders_deployed:
     deployed: false
   host-manager:
     deployed: false
+  ROOT:
+    deployed: true
 
 tomcat_check_banner: "Apache Tomcat/{{ tomcat_version }}"
+
+## Logs path (optional, by default its used tomcat_default_log_catalina_out, tomcat_default_log_logging_path and tomcat_default_log_valves)
+# tomcat_logs_path: /var/log/tomcat
+tomcat_logs_level: {
+  juli: FINE,
+  catalina: INFO
+}
+
+tomcat_default_log_catalina_out: '"$CATALINA_BASE"/logs'
+tomcat_default_log_logging_path: "${catalina.base}/logs"
+tomcat_default_log_valves: "logs"
 
 ## Agent configuration (optional)
 
