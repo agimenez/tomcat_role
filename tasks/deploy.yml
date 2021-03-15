@@ -2,10 +2,8 @@
 
 - name: Tomcat | Install download war from maven require package
   apt:
-    package: "{{ item }}"
+    package: "python3-lxml"
     state: present
-  with_items:
-    - python-lxml
   notify: restart tomcat
   when: tomcat_download_from_maven_wars
 
@@ -19,7 +17,7 @@
     repository_url: "{{ item.repository_url }}"
     classifier: "{{ item.classifier | default(omit) }}"
     dest: "{{ tomcat_webapps_path }}/{{ item.name }}"
-    validate_certs: no
+    validate_certs: false
   with_items: "{{ tomcat_war_to_deploy_from_maven }}"
   notify: restart tomcat
   when:
@@ -36,7 +34,7 @@
     repository_url: "{{ item.repository_url }}"
     classifier: "{{ item.classifier | default(omit) }}"
     dest: "{{ tomcat_webapps_path }}/{{ item.name }}"
-    validate_certs: no
+    validate_certs: false
     verify_checksum: "{{ item.verify_checksum | default('always') }}"
   with_items: "{{ tomcat_war_to_deploy_from_maven }}"
   notify: restart tomcat
@@ -57,9 +55,11 @@
     url: "{{ item.url }}"
     dest: "{{ tomcat_webapps_path }}/{{ item.name }}"
     mode: 0755
-    validate_certs: no
+    validate_certs: false
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
+    username: "{{ item.url_username | default(omit) }}"
+    password: "{{ item.url_password | default(omit) }}"
   with_items: "{{ tomcat_war_to_deploy_urls }}"
   when: tomcat_download_wars
 

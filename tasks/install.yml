@@ -38,12 +38,12 @@
   unarchive:
     extra_opts: ['--strip-components=1']
     src: "{{ tomcat_url }}"
-    remote_src: yes
+    remote_src: true
     dest: "{{ tomcat_install_path }}"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     mode: 0750
-  when: tomcat_force_reinstall or tomcat_check|failed or tomcat_check.stdout == tomcat_check_banner
+  when: 'tomcat_force_reinstall or tomcat_check is failed or tomcat_check.stdout == "Apache Tomcat/tomcat_version"'
 
 - name: Tomcat | Copy Daemon script
   template:
