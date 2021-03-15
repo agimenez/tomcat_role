@@ -91,8 +91,6 @@ tomcat_pre_installed_folders_deployed:
   ROOT:
     deployed: true
 
-tomcat_check_banner: "Apache Tomcat/{{ tomcat_version }}"
-
 ## Logs path (optional, by default its used tomcat_default_log_catalina_out, tomcat_default_log_logging_path and tomcat_default_log_valves)
 # tomcat_logs_path: /var/log/tomcat
 tomcat_logs_level: {
